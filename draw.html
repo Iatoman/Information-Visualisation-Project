@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
+</head>
+
+<body>
+    <svg id="gfg" width="1400" height="1080"></svg>
+
+    <script>
+        var area1 = [
+            { xpoint: 80, ypoint: 380 },
+            { xpoint: 180, ypoint: 460 },
+            { xpoint: 240, ypoint: 420 },
+            { xpoint: 240, ypoint: 380 },
+            { xpoint: 280, ypoint: 380 },
+            { xpoint: 280, ypoint: 180 },
+            { xpoint: 220, ypoint: 180 },
+            { xpoint: 120, ypoint: 240 },
+            { xpoint: 100, ypoint: 280 },
+            { xpoint: 80, ypoint: 380 }
+        ];
+
+        var area2 = [
+            { xpoint: 280, ypoint: 180 },
+            { xpoint: 490, ypoint: 190 },
+            { xpoint: 490, ypoint: 320 },
+            { xpoint: 360, ypoint: 320 },
+            { xpoint: 340, ypoint: 380 },
+            { xpoint: 280, ypoint: 380 },
+        ];
+
+        var area3 = [
+            { xpoint: 490, ypoint: 190 },
+            { xpoint: 490, ypoint: 150 },
+            { xpoint: 640, ypoint: 80 },
+            { xpoint: 640, ypoint: 160 },
+            { xpoint: 700, ypoint: 140 },
+            { xpoint: 740, ypoint: 180 },
+            { xpoint: 780, ypoint: 160 },
+            { xpoint: 760, ypoint: 120 },
+            { xpoint: 770, ypoint: 80 },
+            { xpoint: 830, ypoint: 70 },
+            { xpoint: 830, ypoint: 110 },
+            { xpoint: 860, ypoint: 120 },
+            { xpoint: 830, ypoint: 130 },
+            { xpoint: 830, ypoint: 140 },
+            { xpoint: 850, ypoint: 130 },
+            { xpoint: 810, ypoint: 250 },
+            { xpoint: 810, ypoint: 270 },
+            { xpoint: 760, ypoint: 340 },
+            { xpoint: 680, ypoint: 350 },
+            { xpoint: 600, ypoint: 330 },
+            { xpoint: 490, ypoint: 320 }
+        ];
+
+        var area4 = [
+            { xpoint: 850, ypoint: 130 },
+            { xpoint: 810, ypoint: 250 },
+            { xpoint: 810, ypoint: 270 },
+            { xpoint: 760, ypoint: 340 },
+            { xpoint: 700, ypoint: 400 },
+            { xpoint: 700, ypoint: 460 },
+            { xpoint: 1100, ypoint: 460 },
+            { xpoint: 1140, ypoint: 440 },
+            { xpoint: 970, ypoint: 260 },
+            { xpoint: 920, ypoint: 270 },
+            { xpoint: 920, ypoint: 230 },
+            { xpoint: 850, ypoint: 130 },
+        ];
+
+        var area5 = [
+            { xpoint: 280, ypoint: 380 },
+            { xpoint: 320, ypoint: 380 },
+            { xpoint: 320, ypoint: 380 },
+            { xpoint: 320, ypoint: 460 },
+            { xpoint: 340, ypoint: 460 },
+            { xpoint: 340, ypoint: 520 },
+            { xpoint: 420, ypoint: 520 },
+            { xpoint: 600, ypoint: 700 },
+            { xpoint: 640, ypoint: 740 },
+            { xpoint: 380, ypoint: 640 },
+            { xpoint: 340, ypoint: 640 },
+            { xpoint: 280, ypoint: 560 },
+            { xpoint: 270, ypoint: 520 },
+            { xpoint: 280, ypoint: 440 },
+            { xpoint: 260, ypoint: 440 },
+            { xpoint: 240, ypoint: 420 },
+            { xpoint: 240, ypoint: 380 },
+            { xpoint: 280, ypoint: 380 },
+        ];
+
+        var area6 = [
+            { xpoint: 320, ypoint: 380 },
+            { xpoint: 320, ypoint: 460 },
+            { xpoint: 340, ypoint: 460 },
+            { xpoint: 340, ypoint: 520 },
+            { xpoint: 420, ypoint: 520 },
+            { xpoint: 420, ypoint: 320 },
+            { xpoint: 360, ypoint: 320 },
+            { xpoint: 340, ypoint: 380 },
+            { xpoint: 320, ypoint: 380 }
+        ];
+
+        var area7 = [
+            { xpoint: 1310, ypoint: 530 },
+            { xpoint: 1350, ypoint: 550 },
+            { xpoint: 1390, ypoint: 510 },
+            { xpoint: 1390, ypoint: 910 },
+            { xpoint: 1310, ypoint: 910 },
+            { xpoint: 1310, ypoint: 530 },
+        ];
+
+        var area8 = [
+            { xpoint: 1310, ypoint: 910 },
+            { xpoint: 1390, ypoint: 910 },
+            { xpoint: 890, ypoint: 1040 },
+            { xpoint: 890, ypoint: 980 },
+            { xpoint: 950, ypoint: 970 },
+            { xpoint: 1075, ypoint: 950 },
+            { xpoint: 1250, ypoint: 920 },
+            { xpoint: 1250, ypoint: 900 },
+            { xpoint: 1310, ypoint: 900 },
+            { xpoint: 1310, ypoint: 910 },
+        ];
+
+        var area9 = [
+            { xpoint: 830, ypoint: 820 },
+            { xpoint: 700, ypoint: 820 },
+            { xpoint: 700, ypoint: 780 },
+            { xpoint: 640, ypoint: 780 },
+            { xpoint: 640, ypoint: 840 },
+            { xpoint: 630, ypoint: 850 },
+            { xpoint: 650, ypoint: 870 },
+            { xpoint: 660, ypoint: 870 },
+            { xpoint: 720, ypoint: 1000 },
+            { xpoint: 890, ypoint: 1040 },
+            { xpoint: 890, ypoint: 980 },
+            { xpoint: 890, ypoint: 920 },
+            { xpoint: 960, ypoint: 880 },
+            { xpoint: 960, ypoint: 820 },
+            { xpoint: 830, ypoint: 820 },
+        ];
+
+        var area10 = [
+            { xpoint: 1140, ypoint: 760 },
+            { xpoint: 1140, ypoint: 938 },
+            { xpoint: 950, ypoint: 970 },
+            { xpoint: 890, ypoint: 980 },
+            { xpoint: 890, ypoint: 920 },
+            { xpoint: 960, ypoint: 880 },
+            { xpoint: 960, ypoint: 820 },
+            { xpoint: 960, ypoint: 760 },
+            { xpoint: 1140, ypoint: 760 },
+        ];
+
+        var area11 = [
+            { xpoint: 1140, ypoint: 938 },
+            { xpoint: 1250, ypoint: 920 },
+            { xpoint: 1250, ypoint: 900 },
+            { xpoint: 1310, ypoint: 900 },
+            { xpoint: 1310, ypoint: 760 },
+            { xpoint: 1140, ypoint: 760 },
+            { xpoint: 1140, ypoint: 938 },
+        ];
+
+        var area12 = [
+            { xpoint: 1140, ypoint: 760 },
+            { xpoint: 1140, ypoint: 505 },
+            { xpoint: 1100, ypoint: 460 },
+            { xpoint: 1140, ypoint: 440 },
+            { xpoint: 1200, ypoint: 565 },
+            { xpoint: 1220, ypoint: 555 },
+            { xpoint: 1240, ypoint: 565 },
+            { xpoint: 1290, ypoint: 550 },
+            { xpoint: 1290, ypoint: 530 },
+            { xpoint: 1310, ypoint: 560 },
+            { xpoint: 1310, ypoint: 760 },
+            { xpoint: 1140, ypoint: 760},
+        ];
+
+        var area13 = [
+            { xpoint: 900, ypoint: 460 },
+            { xpoint: 900, ypoint: 535 },
+            { xpoint: 880, ypoint: 610 },
+            { xpoint: 880, ypoint: 685 },
+            { xpoint: 880, ypoint: 790 },
+            { xpoint: 830, ypoint: 790 },
+            { xpoint: 830, ypoint: 820 },
+            { xpoint: 960, ypoint: 820 },
+            { xpoint: 960, ypoint: 760 },
+            { xpoint: 1140, ypoint: 760 },
+            { xpoint: 1140, ypoint: 505 },
+            { xpoint: 1100, ypoint: 460 },
+            { xpoint: 900, ypoint: 460 },
+        ];
+
+        var area14 = [
+            { xpoint: 760, ypoint: 340 },
+            { xpoint: 700, ypoint: 400 },
+            { xpoint: 700, ypoint: 460 },
+            { xpoint: 600, ypoint: 460 },
+            { xpoint: 600, ypoint: 330 },
+            { xpoint: 680, ypoint: 350 },
+            { xpoint: 760, ypoint: 340 },
+        ];
+
+        var area15 = [
+            { xpoint: 490, ypoint: 320 },
+            { xpoint: 600, ypoint: 330 },
+            { xpoint: 600, ypoint: 460 },
+            { xpoint: 420, ypoint: 460 },
+            { xpoint: 420, ypoint: 320 },
+            { xpoint: 490, ypoint: 320 }
+        ];
+
+        var area16 = [
+            { xpoint: 420, ypoint: 460 },
+            { xpoint: 600, ypoint: 460 },
+            { xpoint: 600, ypoint: 700 },
+            { xpoint: 420, ypoint: 520 },
+            { xpoint: 420, ypoint: 460 },
+        ];
+
+        var area17 = [
+            { xpoint: 880, ypoint: 685 },
+            { xpoint: 880, ypoint: 790 },
+            { xpoint: 830, ypoint: 790 },
+            { xpoint: 830, ypoint: 820 },
+            { xpoint: 700, ypoint: 820 },
+            { xpoint: 700, ypoint: 780 },
+            { xpoint: 640, ypoint: 780 },
+            { xpoint: 640, ypoint: 740 },
+            { xpoint: 620, ypoint: 720 },
+            { xpoint: 700, ypoint: 720 },
+            { xpoint: 830, ypoint: 700 },
+            { xpoint: 840, ypoint: 685 },
+            { xpoint: 880, ypoint: 685 },
+        ];
+
+        var area18 = [
+            { xpoint: 700, ypoint: 460 },
+            { xpoint: 900, ypoint: 460 },
+            { xpoint: 900, ypoint: 535 },
+            { xpoint: 880, ypoint: 610 },
+            { xpoint: 880, ypoint: 685 },
+            { xpoint: 840, ypoint: 685 },
+            { xpoint: 830, ypoint: 700 },
+            { xpoint: 700, ypoint: 720 },
+            { xpoint: 700, ypoint: 460 },
+        ];
+
+        var area19 = [
+            { xpoint: 600, ypoint: 700 },
+            { xpoint: 620, ypoint: 720 },
+            { xpoint: 700, ypoint: 720 },
+            { xpoint: 700, ypoint: 460 },
+            { xpoint: 600, ypoint: 460 },
+        ];
+
+        // Using area() function to generate area 
+        var Gen = d3.area()
+            .x((p) => p.xpoint)
+            .y0((p) => 0)
+            .y1((p) => p.ypoint);
+        
+        // Create a platte to represent different shake-intensity / damage
+        var colorScale = d3.scaleThreshold()
+            .domain([10])
+            .range(["#ffffff", "#1901d3", "#005ec4", "#0081b7", "#009ca6", "#00b28c", "#00c565", "#00d400", "#00d400", "#00d400", "00d400"])
+            
+    // Draw the map one by one, need to be change to sth with data later
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area1))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area2))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area3))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area4))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area5))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area6))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area7))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area8))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area9))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area10))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area11))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area12))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area13))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area14))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area15))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area16))
+            .attr("fill", "#69b3b4")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area17))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area18))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+        d3.select("#gfg")
+            .append("path")
+            .attr("d", Gen(area19))
+            .attr("fill", "#75b3b5")
+            .attr("stroke", "white");
+
+    </script>
+</body>
+
+</html>
