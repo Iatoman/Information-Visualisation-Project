@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+
+
+    <script src="js_charts/visualisations.js"></script>
+    <script src="js_charts/cartergram.js"></script>
+    <script src="js_charts/lineChart.js"></script>
+    <script src="js_charts/boxplot.js"></script>
+
+    <title>Information Visualisation Project</title>
+    <link rel="stylesheet" href="main.css">
+
+
+
+
+</head>
+
+<body>
+    <nav class="navbar" data-spy="affix" data-offset-top="10">
+        <div class="container">
+            <div class="navbar" id="buttons">
+                <ul class="navbar-buttons">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projectDescription"> Project Description</a>
+                    </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#des">Data Description</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#task1">Analysis Task 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#task2">Analysis Task 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#task3">Analysis Task 3</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Description -->
+    <section id="projectDescription" class="section">
+        <div class="container">
+            <h6 class="section-title">Project Description</h6>
+            <h6 class="section-subtitle"> What We Have Been Tasked With</h6>
+
+            <p>Our project involves providing emergency response planners in St. Himark with valuable information about
+                the effects of
+                a recent earthquake that hit the city. Emergency responders have already used seismic readings to deploy
+                initial resources,
+                but they require more information to effectively allocate resources and understand the extent of the
+                damage.
+                The city had recently released a damage reporting mobile application that allows citizens to provide
+                real-time damage reports.
+                By using the app responses along with seismic readings and background knowledge of the city, we can help
+                triage efforts for rescue and recovery.
+                <br>
+
+                (visualizations are fully described in report)
+                <br>
+                <br>
+                The first image shows how the locations map to their location number in the data, the second is a
+                seismic map reading of the prequake, and the third is a seismic map reading of the major earthquake.
+                <br>
+                <br>
+                The earthquake shake map shows us the earthquake affects locations in the North-East the most,
+                specifically Old
+                Town(3), Safe Town(4) and partially Easton (14) , Cheddarford (13), Pepper Mill (12), Wilson Forest (7).
+                Initial emergency responses would prioritise these towns first.
+
+            </p>
+            <img src="Images/neighbourhoods.png" width="400" length="400" class="chart">
+            <img src="Images/mc1-prequake-shakemap.png" width="400" length="400">
+            <img src="Images/mc1-majorquake-shakemap.png" width="400" length="400">
+
+        </div>
+    </section>
+    <!-- End OF Project Description Section -->
+
+    <!-- Data Description -->
+    <section id="des" class="section">
+        <div class="container">
+            <h6 class="section-title">Data Description</h6>
+
+            <p>Here are some figures giving an overall statistical summary of the data.
+            </p>
+
+            <p>This visualization of boxplots are good at showing the spread of values from the citizen reports, you are
+                able to get an overall idea of the damages of buildings and shake intensity
+            </p>
+            <iframe src="html_charts/boxplot_Desc1.html" frameborder="0" width="800" height="630"
+                class="chart"></iframe>
+
+            <p> Looking deeper into the values there is an alarming rate of null values within columns</p>
+            <iframe src="html_charts/dataDesc2_pieChart.html" frameborder="0" width="800" height="600"
+                class="chart"></iframe>
+
+            <p>However once looking at where these null values lay, majority were from reports of medical buildings,
+                this would deem acceptable as there are only medical buildings in locations 1,3,5,6,9,11,16. Hence it
+                would be understandable as to why people would be unable to report the damage done which is represented
+                by a null value. </p>
+            <iframe src="html_charts/dataDesc3_Medical.html" frameborder="0" width="800" height="600"
+                class="chart"></iframe>
+
+
+        </div>
+    </section>
+    <!-- End OF Data Description Section -->
+
+    <!-- Task 1 -->
+    <section id="task1" class="section">
+        <div class="container">
+            <h6 class="section-title">Task 1 </h6>
+            <h6 class="section-subtitle" style="font-size: 30px;"> Emergency responders will base their initial response
+                on the earthquake shake
+                map. Use visual analytics to determine how their response should change based on damage reports from
+                citizens on the ground. How would you prioritize neighborhoods for response? Which parts of the city are
+                hardest hit? Limit your response to 1000 words and 10 images.</h6>
+
+            <br>
+            <br>
+
+            <p>Presented below is a Cartogram, it presents the median damage/shake intensity values through a colour
+                scale. Each location is labelled on the map for guidance.This chart is interactiive by allowing youto
+                switch between the different damage catergories.</p>
+
+            <!-- A selection bar to select the features -->
+            <select id="sid" onchange="selectcity('2020/4/7')" style="font-size: 30px;">
+                <option>---Please select---</option>
+                <option>sewer_and_water</option>
+                <option>power</option>
+                <option>roads_and_bridges</option>
+                <option>medical</option>
+                <option>buildings</option>
+                <option>shake_intensity</option>
+            </select>
+            <p style="font-size: 30px; color: aliceblue;">
+                <br /> You can use this slider to choose in which date the damage value was on the map: <br />
+                <input type="range" min="1" max="5" step="1" id="slider" value="1" onchange="getSlider()"
+                    style=" width: 400px;">
+                <br /><br />
+                It shows the value <span id="value">'shake intensity'</span> on the map in <span
+                    id="date">2020/4/6</span>
+            </p>
+            <br />
+
+            <!--Locate an area to draw the cartogram/Choropleth-->
+            <svg id="gfg" width="1400" height="1080"></svg>
+            <script> drawMap('shake_intensity', '2020/4/6') 
+            </script>
+
+            <div style="font-size: 30px; color: aliceblue;">
+                Color representation:<br />
+                The number represents the categorical value of how violent the shaking was/how bad the damage was. (0 -
+                lowest, 10 - highest)<br />
+                The higher the number, the more damage done<br />
+                <button style="background-color: #a50026; width: 30px; height: 30px;"></button> 0
+                <button style="background-color: #d73027; width: 30px; height: 30px;"></button> 1
+                <button style="background-color: #f46d43; width: 30px; height: 30px;"></button> 2
+                <button style="background-color: #fdae61; width: 30px; height: 30px;"></button> 3 <br />
+                <button style="background-color: #fee090; width: 30px; height: 30px;"></button> 4
+                <button style="background-color: #ffffbf; width: 30px; height: 30px;"></button> 5
+                <button style="background-color: #e0f3f8; width: 30px; height: 30px;"></button> 6
+                <button style="background-color: #abd9e9; width: 30px; height: 30px;"></button> 7 <br />
+                <button style="background-color: #74add1; width: 30px; height: 30px;"></button> 8
+                <button style="background-color: #4575b4; width: 30px; height: 30px;"></button> 9
+                <button style="background-color: #313695; width: 30px; height: 30px;"></button> 10 <br />
+            </div>
+
+
+            <p>Below is a parallel plot, similar to the Cartogram, this visualization looks at all the locations at
+                once,
+                to get a clearer view the interactivity allows you to filter out locations. If you filter out results
+                you can see locations 3,8,9,10 all have high median results
+                for damage in all catergories bar shake intensity.</p>
+
+            <iframe src="html_charts/n_parallelchr_q1.html" frameborder="0" width="800" height="600"
+                class="chart"></iframe>
+
+            <p>St. Himark contains 8 hospitals and many state schools, emergency responders would want to prioritise
+                children as they are vunerable and hospital patients as their life could be put further at risk due to
+                the earthquake, for example someone on life support who might lose power or their building gets damaged.
+            </p>
+
+            <iframe src="html_charts/hospitalRadar_chart__q1.html" frameborder="0" width="800" height="600"
+                class="chart"></iframe>
+            <br>
+            <br>
+            <iframe src="html_charts/SchoolRadar_chart_q1.html" frameborder="0" width="800" height="600"
+                class="chart"></iframe>
+
+
+        </div>
+    </section>
+    <!-- End OF Task 1 Section -->
+
+    <!-- Task 2 -->
+    <section id="task2" class="section">
+        <div class="container">
+            <h6 class="section-title">Task 2</h6>
+            <h6 class="section-subtitle"> Use visual analytics to show uncertainty in the data. Compare the reliability
+                of neighborhood reports. Which neighborhoods are providing reliable reports? Provide a rationale for
+                your response. Limit your response to 1000 words and 10 images.</h6>
+
+            <p>One way at determining if data is uncertain or not can be through the lack of results, Here we see a bar
+                plot showing null values for each catergory, with the medical catergory already being explained above,
+                we can look further
+                into the shake intensity, specifically at each locations.</p>
+
+            <iframe src="html_charts/barPlot_nullCatergories.html" frameborder="0" width="800" height="600"
+                class="chart"></iframe>
+
+            <p>In this grouped bar chart we can see possible uncertainty from locations 16 and 1. What is the reasoning
+                for there being more null values? Could it be the earthquake did not affect everyone, or are some people
+                giving false dats? </p>
+            <div class="figure-titles">
+                <h2>Null Shake Intensity values And Their Location</h2>
+                <svg id="uncGBC" height="800" width="800">
+                    <script> uncertaintyGroupBarChart() </script>
+                </svg>
+
+            </div>
+            <br>
+            <br>
+            <p>This box plot is used to show possible uncertainty amongst neighbourhoods through the range in sizes of
+                the boxplots. The greater the vertical length of the boxpplot, the greater uncertainty there is because
+                it shows the residents do not agree on what they expeienced.A "shorter" box plot tells us there is a
+                more collective or similar answer to their shake intensity. The number of outliers also give a clear
+                example of uncertainty</p>
+
+            <iframe src="html_charts/Q2_boxplt.html" frameborder="0" width="800" height="600" class="chart"></iframe>
+            <br>
+            <br>
+            <p> Buildings and Power value is also compared as they are catergories which everywhere in St Himark has
+                (not all locations have hospitals - medical) </p>
+            <iframe src="html_charts/Q2_boxplt2.html" frameborder="0" width="800" height="600" class="chart"></iframe>
+            <br>
+            <iframe src="html_charts/Q2_boxplt3.html" frameborder="0" width="800" height="600" class="chart"></iframe>
+
+
+
+        </div>
+    </section>
+    <!-- End OF Task 2 Section -->
+
+    <!-- Task 3-->
+    <section id="task3" class="section">
+        <div class="container">
+            <h6 class="section-title">Task 3</h6>
+            <h6 class="section-subtitle"> How do conditions change over time? How does uncertainty in change over time?
+                Describe the key changes you see. Limit your response to 500 words and 8 images.</h6>
+        </div>
+        <div id="container" style="height: 1000px;">
+            <p style="font-size: 30px; color: aliceblue;">
+                <br /> 1. How do conditions change over time?<br />
+                <br /> You can use this slider to choose which area you want to see<br />
+                <input type="range" min="1" max="19" step="1" id="slider2" value="1" onchange="getSliderLine()"
+                    style=" width: 400px;">
+                <br /><br />
+                It shows the 6 types of value change changed over time in zone <span id="area"> 1 </span>
+            </p>
+            <svg id="line" style="height:700px ; 
+                width: 1000px; background-color: aliceblue;"></svg>
+            <script>visData(1) </script>
+
+
+
+        </div>
+
+        <p style="font-size: 30px; color: aliceblue;">
+            <br /> 2. How do uncertainty change over time?<br />
+            <br /> You can use this slider to choose which area you want to see<br />
+            <input type="range" min="1" max="19" step="1" id="slider3" value="1" onchange="getSliderBox()"
+                style=" width: 400px;">
+            <br /><br />
+            It shows the shake intensity change changed over time in zone <span id="area2"> 1 </span>
+        <div id="boxplot3" style="height: 1500px"></div>
+        <script src="js_charts/boxplot3.js"></script>
+        <script>drawBoxplot3()</script>
+        </p>
+
+    </section>
+    <!-- End OF Task 3 Section -->
+
+
+
+
+</body>
+
+</html>

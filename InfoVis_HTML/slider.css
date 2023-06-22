@@ -1,0 +1,19 @@
+input[type=range]::-webkit-slider-runnable-track {
+    margin-top: 10px;
+    height: 15px;
+    border-radius: 10px; 
+    box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; 
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 50px;
+    margin-top: -3px; /*Equalize the offset of the slider beyond the track*/
+    background: #ffffff; 
+    border-radius: 50%; /*The appearance is set to circular*/
+    border: solid 0.25em rgba(205, 224, 230, 0.5); /*set border*/
+    box-shadow: 0 .125em .125em #3b4547; /*add shadow*/
+}
+
